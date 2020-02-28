@@ -19,4 +19,8 @@ been implemented.
 
 # Collaborators
 * Jose and Kevin
+<<<<<<< HEAD
 * Capacity: Hinted at what I may want to Google in order to learn how I may accomplish my goals. 
+=======
+* Capacity: Hinted at what I may want to Google in order to learn how I may accomplish my goals. 
+>>>>>>> 689fe778289781d0a61f267f65f27a8930e2095c
