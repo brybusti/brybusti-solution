@@ -17,7 +17,10 @@ def search(conn, bName):
     return execute(conn, "SELECT DISTINCT s.name FROM Sailors AS s INNER JOIN Voyages AS v ON v.sid=s.sid INNER JOIN Boats AS b ON b.bid=v.bid WHERE b.name="+bName)
 
 def dateSearch(conn, date):
-    return execute(conn, "SELECT s.name FROM Sailors AS s INNER JOIN Voyages AS v ON v.sid=s.sid WHERE date_of_voyage="+date)
+    return execute(conn, "SELECT DISTINCT s.name FROM Sailors AS s INNER JOIN Voyages AS v ON v.sid=s.sid WHERE v.date_of_voyage="+date)
+
+def colorSearch(conn, color):
+    return execute(conn, "SELECT DISTINCT s.name FROM Sailors AS s INNER JOIN Voyages AS v ON v.sid=s.sid INNER JOIN Boats AS b ON b.bid=v.bid WHERE b.color="+color)
 
 def views(bp):
     @bp.route("/sailors")
@@ -37,3 +40,9 @@ def views(bp):
             date = '\'' + request.args.get("date") + '\''
             rows = dateSearch(conn, date)
         return render_template("table.html", name="Who sailed that day?", rows=rows)
+    @bp.route("/sailors/who-sailed-on-boat-of-color")
+    def _colorSailed():
+        with get_db() as conn:
+            color = '\'' + request.args.get("color") + '\''
+            rows = colorSearch(conn, color)
+        return render_template("table.html", name="Who sailed that color of boat?", rows=rows)
