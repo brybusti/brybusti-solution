@@ -46,3 +46,8 @@ def views(bp):
             color = '\'' + request.args.get("color") + '\''
             rows = colorSearch(conn, color)
         return render_template("table.html", name="Who sailed that color of boat?", rows=rows)
+    @bp.route("/sailors/add")
+    def _addSailor():
+        with get_db() as conn:
+            rows = search(conn, "'k'")
+        return render_template("table.html", name="Add a Sailor", rows=rows)

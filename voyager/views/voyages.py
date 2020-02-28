@@ -14,5 +14,8 @@ def views(bp):
         with get_db() as conn:
             rows = voyages(conn)
         return render_template("table.html", name="voyages", rows=rows)
-    
-            
+    @bp.route("/voyages/add")
+    def _addVoyages():
+        with get_db() as conn:
+            rows = voyages(conn)
+        return render_template("table.html", name="Add a Voyage", rows=rows)
